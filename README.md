@@ -1,65 +1,100 @@
-# Audio Research
+I am [Sergio Gómez](https://www.linkedin.com/in/sergio-gómez-b81b69184/), student of the [Bachelor’s Degree in Video Games by UPC at CITM](https://www.citm.upc.edu/ing/estudis/graus-videojocs/). This content is generated for the second year’s subject Project 2, under supervision of lecturer [Ricard Pillosu](https://es.linkedin.com/in/ricardpillosu).
 
-Spatial audio and Music manager research with SDL_Mixer.
+# Introduction
 
-On this research I will show a way to hear a fx from any angle, choose a random fx in a Mix_Chunk and other basic stuff.
+Here I will talk about two problems about the audio in our games and how to work these problems and put our games in another level of audio. First we'll see how to make spatial audio work and with a little tweaks in the audio module, how to play random fx from the same type on a unic emitter.
 
-* [Github](https://github.com/Sersius/Audio-Research)
+# Music Manager
 
-* [Website](https://sersius.github.io/Audio-Research/)
+First I recommend to have the SDL_mixer [documents](https://www.libsdl.org/projects/SDL_mixer/docs/SDL_mixer.pdf) open in case you want to check something that you don't understand perfectly or if something mentioned in this web you don't see it clearly.
 
-## Want to do it for yourself?
+# Spatial Audio
 
-You can download the release [here](). In exercices folder you have the TODOs' to follow, and in full_code you have all the code implemented, inside there is a folder named Game with a solution if you don't want to open VS. You can follow the exercices in the web above.
+Spatial audio is a manipulation of the sound that makes the feeling of a 3D space, you can listen [here](https://upfa3d.wordpress.com/category/spatial-audio/) videos that show this effect. This emerged in the 1990s in PC and Game Consoles, for make the feeling of immersion and in FPS games like Counter Strike or Call of Duty, this effect is essential because these are games wich requier a high level of reaction, and with the spatial audio the players can hear if an enemy is coming from any direction.
 
-## Controls
+## Basic knowledge
 
-* Arrows to move
+In order to start with the TODOs of the spatial audio, I will explain some terms that I think are usefulls
 
-* 1 to play the upper-left square
+* **Mix_Chunk:** Is the internal format for an audio chunk and where is stored the sample data, the length in bytesof that data, and the volume to use when mixing the sample.
 
-* 2 to play the center square
+* **Channel:** Is where the chunk will be played.
 
-* 3 to play the upper-right square
+* **Mix_SetPosition:** With this function we emulate a simple 3D audio effect, set the position of a channel depending of the angle and the distance you pass.
 
-* P to pause the music
+* **Mix_PlayChannel:** Play a chunk in a channel that we pass.
 
-* Keys + and - to change the general volume
+## Functions for spatial audio
 
-## Tools used
+There are two functions for the correct execution of the spatial audio
 
-* IDE: Microsoft Visual Studio 2017
+* **GetAngle**
 
-* Language: C++
+```
+uint j1Audio::GetAngle(iPoint player_pos, iPoint enemy_pos)
+{
+	iPoint vector_pos = player_pos - enemy_pos;		        // The vector of the player and enemy positions
+	iPoint vector_axis = { 0, 1 };				        // We use the this vector because we want the angle that is formed with the Y axis
 
-* Containers: STL
+	double dot_x = vector_axis.y * vector_pos.y;			// Product of the two vectors to get the X position
+	double det_y = -(vector_axis.y * vector_pos.x);                 // Determinant of the two vectors to get the Y position
 
-* Graphics and audio: SDL 2.0
+	float f_angle = (atan2(det_y, dot_x)) * RAD_TO_DEG;		// Arc tangent of the previous X and Y, multiply the result with RAD_TO_DEG to get the result in degrees instead of radiants
 
-* Data: pugixml 1.8
+	if (f_angle < 0)			                        // If the angle is negative we add +360 because in PlaySpatialFx() we need the channel to be positive
+		f_angle += 360;
 
-* Code repository: GitHub
+	return uint(f_angle);
+}
+```
+This function calculate the angle with the atan2 given the Dot product and the determinant. In case the angle is negative we add +360 for when we pass it to PlaySpatialFx(), because we will use this angle "as a channel" and a channel can't be negative.
 
-## License
+* **GetDistance**
 
-MIT License
+```
+uint j1Audio::GetDistance(iPoint player_pos, iPoint enemy_pos)
+{
+	// TODO 3 Calculate the distance we want to pass to PlaySpatialFx(), use this uint created | Hey Pythagoras!
+	uint distance = 0;
 
-Copyright (c) 2018 
+	uint distance_scaled = (distance * MAX_DISTANCE) / scale;	// We can scale the maximum hear distance by modifying scale in the config XML
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+	if (distance_scaled > MAX_DISTANCE)			        // If the distance is greater than the MAX_DISTANCE(255), keep it in 255
+		distance_scaled = MAX_DISTANCE;
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+	return distance_scaled;
+}
+```
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+With this function we calculate the distance thatis between the player and the channel that emits the sound. We can scale the max distance with the variable scale modifying it on the config.xml.
+### Markdown
+
+Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+
+```markdown
+Syntax highlighted code block
+
+# Header 1
+## Header 2
+### Header 3
+
+- Bulleted
+- List
+
+1. Numbered
+2. List
+
+**Bold** and _Italic_ and `Code` text
+
+[Link](url) and ![Image](src)
+```
+
+For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+
+### Jekyll Themes
+
+Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Sersius/Audio-Research/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+
+### Support or Contact
+
+Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
