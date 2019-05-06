@@ -2,7 +2,7 @@ I am [Sergio Gómez](https://www.linkedin.com/in/sergio-gómez-b81b69184/), stud
 
 # Introduction
 
-Here I will talk about two problems about the audio in our games and how to work these problems and put our games in another level of audio. First we'll see how to make spatial audio work and with a little tweaks in the audio module, how to play random fx from the same type on a unic emitter.
+Here I will talk about two problems about the audio in our games and how to work these problems and put our games in another level of audio. First we'll see how to make spatial audio work and with a little tweaks in the audio module, how to play random fx from the same type on a unic emitter. You can download the release [here](https://github.com/Sersius/Audio-Research/releases/tag/0.1) and follow all the steps.
 
 # Music Manager
 
