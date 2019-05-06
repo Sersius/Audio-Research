@@ -75,55 +75,96 @@ Now we know some of this let's start with the TODOs!
 Allocate the channels that we will use, remember how many degrees are...
 We have to allocate channels for play the chunks later, we must have control of this chunks.
 
-![](TODOS/TODO1.png)
+![](images/TODO1.png)
 
 ### TODO 2
 
 Set a channel in a position given a channel, an angle and a distance and play the channel that we already placed with Mix_SetPosition()
 Once we allocated the channel now we can place it in a concrete position and play it.
 
-![](TODOS/TODO2.png)
+![](images/TODO2.png)
 
 ### TODO 3
 
 Calculate the distance we want to pass to PlaySpatialFx(). Here is easy as pythagoras, if you don't remember some usefull function from math.h are pow() and sqrt().
 
-![](TODOS/TODO3.png)
+![](images/TODO3.png)
 
 ### TODO 4
 
 Replace PlayFx() for PlaySpatialFx() and pass all the things the method needs (don't put anything on FxPack for now), with all this now we can hear spatial audio. Play a little with the scale from the XML.
 
-![](TODOS/TODO4.png)
+![](images/TODO4.png)
 
-### Markdown
+Now we have a magnificent spatial audio to enjoy, but this is not over yet.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Make a different Mix_chunk for the same action
 
-```markdown
-Syntax highlighted code block
+Sometimes when we are playing a game and an enemy dies, it always sound the same, doesn't change his death sound. With this implementation the same enemy will die with diferent sounds choseen randomly.
 
-# Header 1
-## Header 2
-### Header 3
+* **ChooseFx**
 
-- Bulleted
-- List
+```
+uint j1Audio::ChooseFx(FxPack pack)	// Choose an audio on the standar Mix_Chunk* or on a self-made one
+{
+	uint fx_num = 0;
 
-1. Numbered
-2. List
+	switch (pack)
+	{
+	case DEATH:
+		// TODO 6.2 Complete this case too
 
-**Bold** and _Italic_ and `Code` text
+		break;
+	case NONE:
+		while (fx[fx_num] != nullptr)
+		{
+			fx_num++;
+		}
+		break;
+	default:
+		break;
+	}
 
-[Link](url) and ![Image](src)
+	fx_num -= 1;
+
+	uint fx = rand() % fx_num;
+
+	return fx;
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+With this easy function, we pass an enum to choose the Mix_chunk, and then a random fx inside the Mix_chunk.
 
-### Jekyll Themes
+### TODO 5
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Sersius/Audio-Research/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Create a new Mix_Chunk, fx_death_pack for example, as simple as that
 
-### Support or Contact
+![](images/TODO5.png)
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### TODO 6
+
+Complete the case to load an fx in the new Mix_chunk, we have to do this four more times
+
+![](images/TODO6.png)
+
+### TODO 7
+
+We are so close to finish! Load and Unload the fx but counting the new Mix_chunk
+
+![](images/TODO7.png)
+
+### TODO 8
+
+Complete the PlaySpatialFx with the new Mix_chunk and the enum of FxPack
+
+![](images/TODO4.png)
+
+Now we have three enemies that when die they make different sounds.
+
+If you want to see if your result it's ok, you can go to the full_code folder, Game, and execute the solution to compare.
+
+## Okey, and now what?
+If you enjoyed digging in SDL_mixer and the spatial audio, you can now try [OpenAl](), this tool is created to work with 3D audio so it might be more difficult than the spatial audio you learned today but you can learn a lot more!
+
+If you are still here I want to say thanks and hope you learned something that you didn't know today.
+Thanks for your attention and bye!
