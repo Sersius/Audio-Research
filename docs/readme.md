@@ -67,6 +67,35 @@ uint j1Audio::GetDistance(iPoint player_pos, iPoint enemy_pos)
 ```
 
 With this function we calculate the distance thatis between the player and the channel that emits the sound. We can scale the max distance with the variable scale modifying it on the config.xml.
+
+Now we know some of this let's start with the TODOs!
+
+### TODO 1
+
+Allocate the channels that we will use, remember how many degrees are...
+We have to allocate channels for play the chunks later, we must have control of this chunks.
+
+![](TODOS/TODO1.png)
+
+### TODO 2
+
+Set a channel in a position given a channel, an angle and a distance and play the channel that we already placed with Mix_SetPosition()
+Once we allocated the channel now we can place it in a concrete position and play it.
+
+![](TODOS/TODO2.png)
+
+### TODO 3
+
+Calculate the distance we want to pass to PlaySpatialFx(). Here is easy as pythagoras, if you don't remember some usefull function from math.h are pow() and sqrt().
+
+![](TODOS/TODO3.png)
+
+### TODO 4
+
+Replace PlayFx() for PlaySpatialFx() and pass all the things the method needs (don't put anything on FxPack for now), with all this now we can hear spatial audio. Play a little with the scale from the XML.
+
+![](TODOS/TODO4.png)
+
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
