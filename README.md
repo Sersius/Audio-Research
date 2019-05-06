@@ -10,7 +10,7 @@ On this research I will show a way to hear a fx from any angle, choose a random 
 
 ## Want to do it for yourself?
 
-You can download the release [here](). In exercices folder you have the TODOs' to follow, and in full_code you have all the code implemented, inside there is a folder named Game with a solution if you don't want to open VS. You can follow the exercices in the web above.
+You can download the release [here](https://github.com/Sersius/Audio-Research/releases/tag/0.1). In exercices folder you have the TODOs' to follow, and in full_code you have all the code implemented, inside there is a folder named Game with a solution if you don't want to open VS. You can follow the exercices in the web above.
 
 ## Controls
 
