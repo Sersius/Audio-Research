@@ -75,26 +75,26 @@ Now we know some of this let's start with the TODOs!
 Allocate the channels that we will use, remember how many degrees are...
 We have to allocate channels for play the chunks later, we must have control of this chunks.
 
-![](images/TODO1.png)
+![](images/TODO1.PNG)
 
 ### TODO 2
 
 Set a channel in a position given a channel, an angle and a distance and play the channel that we already placed with Mix_SetPosition()
 Once we allocated the channel now we can place it in a concrete position and play it.
 
-![](images/TODO2.png)
+![](images/TODO2.PNG)
 
 ### TODO 3
 
 Calculate the distance we want to pass to PlaySpatialFx(). Here is easy as pythagoras, if you don't remember some usefull function from math.h are pow() and sqrt().
 
-![](images/TODO3.png)
+![](images/TODO3.PNG)
 
 ### TODO 4
 
 Replace PlayFx() for PlaySpatialFx() and pass all the things the method needs (don't put anything on FxPack for now), with all this now we can hear spatial audio. Play a little with the scale from the XML.
 
-![](images/TODO4.png)
+![](images/TODO4.PNG)
 
 Now we have a magnificent spatial audio to enjoy, but this is not over yet.
 
@@ -139,32 +139,32 @@ With this easy function, we pass an enum to choose the Mix_chunk, and then a ran
 
 Create a new Mix_Chunk, fx_death_pack for example, as simple as that
 
-![](images/TODO5.png)
+![](images/TODO5.PNG)
 
 ### TODO 6
 
 Complete the case to load an fx in the new Mix_chunk, we have to do this four more times
 
-![](images/TODO6.png)
+![](images/TODO6.PNG)
 
 ### TODO 7
 
 We are so close to finish! Load and Unload the fx but counting the new Mix_chunk
 
-![](images/TODO7.png)
+![](images/TODO7.PNG)
 
 ### TODO 8
 
 Complete the PlaySpatialFx with the new Mix_chunk and the enum of FxPack
 
-![](images/TODO4.png)
+![](images/TODO4.PNG)
 
 Now we have three enemies that when die they make different sounds.
 
 If you want to see if your result it's ok, you can go to the full_code folder, Game, and execute the solution to compare.
 
 ## Okey, and now what?
-If you enjoyed digging in SDL_mixer and the spatial audio, you can now try [OpenAl](), this tool is created to work with 3D audio so it might be more difficult than the spatial audio you learned today but you can learn a lot more!
+If you enjoyed digging in SDL_mixer and the spatial audio, you can now try [OpenAl](https://www.openal.org/), this tool is created to work with 3D audio so it might be more difficult than the spatial audio you learned today but you can learn a lot more!
 
 If you are still here I want to say thanks and hope you learned something that you didn't know today.
 Thanks for your attention and bye!
